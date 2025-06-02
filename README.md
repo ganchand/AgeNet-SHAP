@@ -4,7 +4,7 @@ AgeNet-SHAP method developed by Gauri Darekar*, Taslim Murad*, Hui-Yuan Miao, De
 (*: co-first authors; #: senior and supervising author)
 
 Citation (preprint): 
-Nie Y, Murad T, Miao HY, Bhattarai P, Thakuri DS, Chand GB. Characterizing multivariate regional hubs for schizophrenia classification, sex differences, and brain age estimation using explainable AI. medRxiv [Preprint]. 2025 Mar 4:2025.02.28.25323105. doi: 10.1101/2025.02.28.25323105. PMID: 40093221; PMCID: PMC11908315.
+Darekar G, Murad T, Miao HY, Thakuri DS; Alzheimer’s Disease Neuroimaging Initiative; Chand GB. AgeNet-SHAP: An explainable AI approach for optimally mapping multivariate regional brain age and clinical severity patterns in Alzheimer's disease. medRxiv [Preprint]. 2025 Mar 4:2025.02.28.25323097. doi: 10.1101/2025.02.28.25323097. PMID: 40093264; PMCID: PMC11908337.
 https://www.medrxiv.org/content/10.1101/2025.02.28.25323097v1
 
 AgeNet-SHAP: 
