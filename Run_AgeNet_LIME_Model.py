@@ -43,10 +43,6 @@ data_file = 'path to data CSV file'   # should be in the format ROI1, ROI2, ROI3
 
 X, y, Predictor, input_shape = data_processing(data_file)
 
-model = build_model(input_shape)
-# Compile the model
-model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
-
 # Define callbacks
 def lr_scheduler(epoch, lr):
     decay_rate = 0.9
@@ -72,6 +68,10 @@ for i, (train_index, test_index) in enumerate(cv.split(X)):
     print('fold_number', fold_number)
     print("Train Index: ", train_index, "\n")
     print("Test Index: ", test_index)
+
+    model = build_model(input_shape)
+    # Compile the model
+    model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
