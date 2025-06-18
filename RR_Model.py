@@ -25,13 +25,12 @@ X, y, Predictor, input_shape = data_processing(data_file)
 
 param_grid = {'alpha': np.linspace(150, 250, 10)}
 print(param_grid)
+model = Ridge()
+grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error')
 
 cv = KFold(n_splits=10, random_state=45, shuffle=True)
 
 for i, (train_index, test_index) in enumerate(cv.split(X)):
-    model = Ridge()
-    grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error')
-
     X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
