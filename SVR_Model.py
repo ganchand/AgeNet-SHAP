@@ -48,13 +48,13 @@ param_grid = {'C': c_grid,
 
 print(param_grid)
 
-model = SVR(kernel='rbf')
-print(metrics.SCORERS.keys())
-grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error', refit=True)
-
 cv = KFold(n_splits=10, random_state=45, shuffle=True)
 
 for i, (train_index, test_index) in enumerate(cv.split(X)):
+    model = SVR(kernel='rbf')
+    print(metrics.SCORERS.keys())
+    grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error', refit=True)
+
     X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
