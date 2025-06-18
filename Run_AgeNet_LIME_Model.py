@@ -54,6 +54,10 @@ def lr_scheduler(epoch, lr):
 reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.9, patience=10, min_lr=0.00001, verbose=1, mode='auto', min_delta=0.01)
 early_call_train = tf.keras.callbacks.EarlyStopping(monitor='loss', min_delta=0.01, patience=50, verbose=2, mode='min', restore_best_weights=True)
 
+model = build_model(input_shape)
+# Compile the model
+model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
+
 n_splits = 10
 batch_size = 64
 n_epoch = 300
@@ -68,10 +72,6 @@ for i, (train_index, test_index) in enumerate(cv.split(X)):
     print('fold_number', fold_number)
     print("Train Index: ", train_index, "\n")
     print("Test Index: ", test_index)
-
-    model = build_model(input_shape)
-    # Compile the model
-    model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
