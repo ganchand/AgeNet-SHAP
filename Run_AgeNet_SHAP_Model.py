@@ -50,12 +50,8 @@ def lr_scheduler(epoch, lr):
         return lr * decay_rate
     return lr
 
-reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.9, patience=10, min_lr=0.00001, verbose=1, mode='auto', min_delta=0.01)
-early_call_train = tf.keras.callbacks.EarlyStopping(monitor='loss', min_delta=0.01, patience=50, verbose=2, mode='min', restore_best_weights=True)
-
-model = build_model(input_shape)
-# Compile the model
-model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
+reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.9, patience=10, min_lr=0.00001, verbose=1, mode='auto', min_delta=0.01)
+early_call_train = tf.keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=0.01, patience=50, verbose=2, mode='min', restore_best_weights=True)
 
 n_splits = 10
 batch_size = 64
@@ -67,6 +63,10 @@ cv = KFold(n_splits=n_splits, random_state=123, shuffle=True)
 
 # Start cross-validation training-testing loop
 for i, (train_index, test_index) in enumerate(cv.split(X)):
+    model = build_model(input_shape)
+    # Compile the model
+    model.compile(optimizer=Adam(learning_rate=rate), loss=tf.keras.losses.MeanAbsoluteError(), metrics=[tf.keras.metrics.MeanAbsolutePercentageError()])
+
     fold_number = i + 1
     print('fold_number', fold_number)
     print("Train Index: ", train_index, "\n")
