@@ -25,12 +25,13 @@ X, y, Predictor, input_shape = data_processing(data_file)
 
 param_grid = {'alpha': (0.15, 0.2, 0.25, 0.3, 0.35)}
 print(param_grid)
-model = Lasso()
-grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error', refit=True)
 
 cv = KFold(n_splits=10, random_state=45, shuffle=True)
 
 for i, (train_index, test_index) in enumerate(cv.split(X)):
+    model = Lasso()
+    grid = GridSearchCV(model, param_grid, scoring='neg_mean_absolute_error', refit=True)
+
     X_train, X_test, y_train, y_test = X[train_index], X[test_index], y[train_index], y[test_index]
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
