@@ -51,8 +51,8 @@ def lr_scheduler(epoch, lr):
         return lr * decay_rate
     return lr
 
-reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.9, patience=10, min_lr=0.00001, verbose=1, mode='auto', min_delta=0.01)
-early_call_train = tf.keras.callbacks.EarlyStopping(monitor='loss', min_delta=0.01, patience=50, verbose=2, mode='min', restore_best_weights=True)
+reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.9, patience=10, min_lr=0.00001, verbose=1, mode='auto', min_delta=0.01)
+early_call_train = tf.keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=0.01, patience=50, verbose=2, mode='min', restore_best_weights=True)
 
 n_splits = 10
 batch_size = 64
